@@ -121,6 +121,11 @@ GEM
     nio4r (2.7.4)
     nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
+    propshaft (1.1.0)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     psych (5.2.0)
       stringio
     puma (6.4.3)
@@ -203,6 +208,7 @@ PLATFORMS
 
 DEPENDENCIES
   med_pipe!
+  propshaft
   puma
   rspec-rails (= 6.1.5)
   sqlite3

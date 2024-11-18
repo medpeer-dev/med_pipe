@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Specify your gem's dependencies in med_pipe.gemspec.
 gemspec
 
+gem "propshaft"
 gem "puma"
 
 gem "sqlite3"
