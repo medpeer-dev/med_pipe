@@ -10,6 +10,8 @@ Style/StringLiterals:
 
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
+  Exclude:
+    - 'app/models/med_pipe/application_record.rb'
 
 Style/Documentation:
   Enabled: false
