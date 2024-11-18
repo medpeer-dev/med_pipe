@@ -1,4 +1,4 @@
-module MedPipe
-  class Engine < ::Rails::Engine
-  end
+# frozen_string_literal: true
+
+class MedPipe::Engine < Rails::Engine
 end

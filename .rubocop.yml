@@ -1,0 +1,19 @@
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'spec/dummy/**/*'
+  NewCops: enable
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Exclude:
+    - "db/migrate/*.rb"

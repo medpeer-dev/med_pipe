@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "lib/med_pipe/version"
 
 Gem::Specification.new do |spec|
@@ -9,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary     = "Summary of MedPipe."
   # spec.description = "TODO: Description of MedPipe."
   spec.license     = "MIT"
-  spec.required_ruby_version = '>= 3.0.0'
+  spec.required_ruby_version = ">= 3.0.0"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -24,4 +26,5 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "rails", ">= 6.1.7"
+  spec.metadata["rubygems_mfa_required"] = "true"
 end
