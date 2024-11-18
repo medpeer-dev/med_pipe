@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_18_063336) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_18_063336) do
   create_table "med_pipe_pipeline_plans", force: :cascade do |t|
     t.string "name", null: false
     t.string "output_unit", null: false
     t.date "target_date"
-    t.string "upload_to", null: false
+    t.string "upload_to"
     t.string "status", null: false
     t.datetime "started_at"
     t.datetime "finished_at"
