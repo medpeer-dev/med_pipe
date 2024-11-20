@@ -21,6 +21,12 @@ Or install it yourself as:
 $ gem install med_pipe
 ```
 
+### migrationファイルの追加
+
+```shell
+$ rails med_pipe:install:migrations
+```
+
 ## Contributing
 Contribution directions go here.
 
