@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_18_063336) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_21_012327) do
   create_table "med_pipe_pipeline_plans", force: :cascade do |t|
     t.string "name", null: false
     t.string "output_unit", null: false
@@ -20,6 +20,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_18_063336) do
     t.datetime "started_at"
     t.datetime "finished_at"
     t.integer "file_size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "test_users", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
