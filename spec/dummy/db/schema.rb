@@ -13,13 +13,16 @@
 ActiveRecord::Schema[7.2].define(version: 2024_11_21_012327) do
   create_table "med_pipe_pipeline_plans", force: :cascade do |t|
     t.string "name", null: false
+    t.integer "priority", default: 0, null: false
+    t.string "status", null: false
     t.string "output_unit", null: false
     t.date "target_date"
+    t.bigint "data_count"
+    t.string "file_name"
+    t.bigint "file_size"
     t.string "upload_to"
-    t.string "status", null: false
     t.datetime "started_at"
     t.datetime "finished_at"
-    t.integer "file_size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
