@@ -11,6 +11,7 @@ gem "puma"
 
 gem "sqlite3"
 
+gem "factory_bot_rails"
 gem "rubocop", require: false
 gem "rubocop-performance", require: false
 gem "rubocop-rails", require: false

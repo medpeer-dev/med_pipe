@@ -17,9 +17,9 @@ RSpec.describe MedPipe::BatchReader do
 
     context "when records exist" do
       before do
-        TestUser.create!(name: "User yesterday", created_at: Date.yesterday)
-        7.times { |i| TestUser.create!(name: "User #{i}") }
-        TestUser.create!(name: "User tomorrow", created_at: Date.tomorrow)
+        create(:test_user, name: "User yesterday", created_at: Date.yesterday)
+        7.times { |i| create(:test_user, name: "User #{i}") }
+        create(:test_user, name: "User tomorrow", created_at: Date.tomorrow)
       end
 
       it "pluckした結果を1件ずつ渡す" do

@@ -4,9 +4,9 @@ require "rails_helper"
 
 RSpec.describe MedPipe::BatchIdFetcher do
   let(:batch_size) { 2 }
-  let(:max_result_size) { 5 }
+  let(:max_load_size) { 5 }
   let(:relation) { TestUser.all }
-  let(:fetcher) { described_class.new(relation, batch_size: batch_size, max_result_size: max_result_size) }
+  let(:fetcher) { described_class.new(relation, batch_size: batch_size, max_load_size: max_load_size) }
 
   describe "#initialize" do
     context "with invalid batch_size" do
@@ -50,8 +50,8 @@ RSpec.describe MedPipe::BatchIdFetcher do
         expect(results.flatten).to match_array(TestUser.all.ids)
       end
 
-      context "with max_result_size smaller than total records" do
-        let(:max_result_size) { 3 }
+      context "with max_load_size smaller than total records" do
+        let(:max_load_size) { 3 }
 
         before do
           allow(fetcher).to receive(:load_ids).and_call_original
