@@ -17,8 +17,7 @@ Style/Documentation:
   Enabled: false
 
 Metrics/MethodLength:
-  Exclude:
-    - "db/migrate/*.rb"
+  Enabled: false
 
 Metrics/BlockLength:
   Exclude:
