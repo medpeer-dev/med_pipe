@@ -19,3 +19,7 @@ Style/Documentation:
 Metrics/MethodLength:
   Exclude:
     - "db/migrate/*.rb"
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*_spec.rb
