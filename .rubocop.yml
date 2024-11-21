@@ -22,3 +22,6 @@ Metrics/MethodLength:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*_spec.rb
+
+Metrics/AbcSize:
+  Enabled: false
