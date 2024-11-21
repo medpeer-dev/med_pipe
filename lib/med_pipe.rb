@@ -5,6 +5,8 @@ require "med_pipe/engine"
 require "med_pipe/pipeline"
 require "med_pipe/batch_id_fetcher"
 require "med_pipe/batch_reader"
+require "med_pipe/pipeline_task"
+require "med_pipe/pipeline_task/counter"
 
 module MedPipe
   # Your code goes here...
