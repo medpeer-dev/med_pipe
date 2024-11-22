@@ -60,4 +60,36 @@ RSpec.describe MedPipe::PipelinePlanConsumer do
       end
     end
   end
+
+  describe "結合テスト" do
+    let(:pipeline_group) { create(:med_pipe_pipeline_group) }
+    let(:pipeline_runner) { SamplePipelineRunner.new } # SamplePipelineRunnerで作るPipelineが正常に動作するかをテストする
+    let(:consumer) { described_class.new(pipeline_group_id: pipeline_group.id, pipeline_runner: pipeline_runner) }
+    let(:created_time) { Time.zone.parse("2024-11-11 12:00:00") }
+    let!(:plan) do
+      create(:med_pipe_pipeline_plan,
+             name: name,
+             pipeline_group: pipeline_group,
+             status: :enqueued,
+             target_date: created_time.to_date)
+    end
+
+    context "daily_test_user" do
+      let(:name) { "daily_test_user" }
+
+      before do
+        create(:test_user, name: "User yesterday", created_at: created_time.yesterday)
+        7.times { |i| create(:test_user, name: "User #{i}", created_at: created_time) }
+        create(:test_user, name: "User tomorrow", created_at: created_time.tomorrow)
+      end
+
+      it "Pipelineが正常に動作し、Planに結果が保存される" do
+        expect { consumer.run }.to change { plan.reload.status }.from("enqueued").to("finished")
+        expect(plan).to have_attributes(
+          data_count: 7,
+          file_name: "daily_test_user_20241111.tsv"
+        )
+      end
+    end
+  end
 end
