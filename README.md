@@ -1,24 +1,27 @@
-# MedPipe
-Short description and motivation.
+# MedPipe <sup>BETA</sup>
+100万 ~ 数10億程度のデータを処理するための仕組みを提供する Rails エンジンです。
+
+## Concept
+TODO 書く
+
+- pipeline
+- pipeline_task
+- pipeline_plan
+- pipeline_group
 
 ## Usage
-How to use my plugin.
+TODO 書く
+
+1. pipeline_runner の作成
+2. ジョブの作成
+3. pipeline_plan, groupの登録
+4. 実行コマンドの作成
 
 ## Installation
 Add this line to your application's Gemfile:
 
 ```ruby
 gem "med_pipe"
-```
-
-And then execute:
-```bash
-$ bundle
-```
-
-Or install it yourself as:
-```bash
-$ gem install med_pipe
 ```
 
 ### migrationファイルの追加
@@ -28,7 +31,7 @@ $ rails med_pipe:install:migrations
 ```
 
 ## Contributing
-Contribution directions go here.
+Bug reports and pull requests are welcome.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
