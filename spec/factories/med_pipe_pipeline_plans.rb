@@ -5,5 +5,6 @@ FactoryBot.define do
     name { "dummy" }
     output_unit { :all }
     status { :waiting }
+    association :pipeline_group, factory: :med_pipe_pipeline_group
   end
 end

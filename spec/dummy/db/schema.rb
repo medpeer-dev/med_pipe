@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_21_012327) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_22_022123) do
+  create_table "med_pipe_pipeline_groups", force: :cascade do |t|
+    t.integer "parallel_limit", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "med_pipe_pipeline_plans", force: :cascade do |t|
     t.string "name", null: false
     t.integer "priority", default: 0, null: false
@@ -25,6 +31,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_21_012327) do
     t.datetime "finished_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "pipeline_group_id", null: false
+    t.index ["pipeline_group_id"], name: "index_med_pipe_pipeline_plans_on_pipeline_group_id"
   end
 
   create_table "test_users", force: :cascade do |t|
