@@ -3,6 +3,8 @@
 class MedPipe::PipelinePlan < MedPipe::ApplicationRecord
   belongs_to :pipeline_group, class_name: "MedPipe::PipelineGroup", optional: true
 
+  scope :active, -> { where(status: %i[enqueued running]) }
+
   validates :name, presence: true
   validates :output_unit, presence: true
   validates :status, presence: true
