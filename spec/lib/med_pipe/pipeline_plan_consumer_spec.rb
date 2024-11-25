@@ -6,7 +6,7 @@ RSpec.describe MedPipe::PipelinePlanConsumer do
   describe "#run" do
     let(:pipeline_group) { create(:med_pipe_pipeline_group) }
     let(:pipeline_runner) { instance_double(MedPipe::PipelineRunnerBase) }
-    let(:consumer) { described_class.new(pipeline_group_id: pipeline_group.id, pipeline_runner: pipeline_runner) }
+    let(:consumer) { described_class.new(pipeline_group: pipeline_group, pipeline_runner: pipeline_runner) }
 
     before do
       create(:med_pipe_pipeline_plan, pipeline_group: pipeline_group, status: :waiting)
@@ -64,7 +64,7 @@ RSpec.describe MedPipe::PipelinePlanConsumer do
   describe "結合テスト" do
     let(:pipeline_group) { create(:med_pipe_pipeline_group) }
     let(:pipeline_runner) { SamplePipelineRunner.new } # SamplePipelineRunnerで作るPipelineが正常に動作するかをテストする
-    let(:consumer) { described_class.new(pipeline_group_id: pipeline_group.id, pipeline_runner: pipeline_runner) }
+    let(:consumer) { described_class.new(pipeline_group: pipeline_group, pipeline_runner: pipeline_runner) }
     let(:created_time) { Time.zone.parse("2024-11-11 12:00:00") }
     let!(:plan) do
       create(:med_pipe_pipeline_plan,

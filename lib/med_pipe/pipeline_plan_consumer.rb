@@ -3,8 +3,8 @@
 # enqueued な pipeline plan を1つ取得 & 実行
 class MedPipe::PipelinePlanConsumer
   # @param [Proc] pipeline_runner pipeline plan から pipeline を作成し実行する
-  def initialize(pipeline_group_id:, pipeline_runner:)
-    @pipeline_group_id = pipeline_group_id
+  def initialize(pipeline_group:, pipeline_runner:)
+    @pipeline_group = pipeline_group
     @pipeline_runner = pipeline_runner
   end
 
@@ -25,9 +25,7 @@ class MedPipe::PipelinePlanConsumer
 
   def fetch_and_run_pipeline_plan
     ApplicationRecord.transaction do
-      target_pipeline_plan = MedPipe::PipelinePlan
-                             .lock.where(status: :enqueued, pipeline_group_id: @pipeline_group_id)
-                             .order(priority: :desc).first
+      target_pipeline_plan = @pipeline_group.pipeline_plans.lock.status_enqueued.order(priority: :desc).first
       return if target_pipeline_plan.nil?
 
       target_pipeline_plan.update!(status: :running)
