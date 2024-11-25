@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    med_pipe (0.1.0.3)
+    med_pipe (0.1.0.4)
       rails (>= 6.1.7, < 8.0)
 
 GEM
