@@ -20,11 +20,11 @@ end
 ```
 
 ### MedPipe::PipelinePlan
-Pipeline の状態、オプション、結果を保存するためのモデルです。
-Task で使うためのオプションを渡す方法は、PipelinePlan から取得するか、contextで伝搬するかの二択です。
+Pipeline の状態、オプション、結果を保存するためのモデルです。  
+Task で使うためのオプションを渡す方法は PipelinePlan から取得するか、contextで伝搬するかの二択です。
 
 ### MedPipe::PipelineGroup
-一つのジョブで実行する Plan をまとめるためのモデルです。
+一つのジョブで実行する Plan をまとめるためのモデルです。  
 実行中に parallel_limit を 0 にすることで中断することができます。
 
 ## Usage
