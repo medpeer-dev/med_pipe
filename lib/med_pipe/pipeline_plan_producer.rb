@@ -12,7 +12,7 @@ class MedPipe::PipelinePlanProducer
     return if @pipeline_group.parallel_limit <= 0
 
     @pipeline_group.with_lock do
-      enqueue_count = @pipeline_group.parallel_limit - active_pipeline_plan_count
+      enqueue_count = @pipeline_group.parallel_limit - @pipeline_group.pipeline_plans.active.count
       enqueue(enqueue_count) if enqueue_count.positive?
     end
   end
@@ -28,14 +28,7 @@ class MedPipe::PipelinePlanProducer
     end
   end
 
-  def active_pipeline_plan_count
-    MedPipe::PipelinePlan.where(status: %i[enqueued running], pipeline_group: @pipeline_group).count
-  end
-
   def fetch_target_pipeline_plans(size:)
-    MedPipe::PipelinePlan
-      .where(status: :waiting, pipeline_group: @pipeline_group)
-      .order(priority: :desc)
-      .limit(size)
+    @pipeline_group.pipeline_plans.status_waiting.order(priority: :desc).limit(size)
   end
 end
