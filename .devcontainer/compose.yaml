@@ -1,31 +1,24 @@
-name: "dummy"
+name: "med_pipe"
 
 services:
   rails-app:
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
-
+    env_file: devcontainer.env
     volumes:
-    - ../..:/workspaces:cached
-
-    # Overrides default command so things don't shut down after the process ends.
+    - ..:/app:cached
     command: sleep infinity
-
-    # Uncomment the next line to use a non-root user for all processes.
-    # user: vscode
-
-    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally.
-    # (Adding the "ports" property to this file will not forward from a Codespace.)
     depends_on:
-    - redis
-
-  redis:
-    image: redis:7.2
-    restart: unless-stopped
+    - mysql
+  mysql:
+    image: mysql:8.0
+    ports:
+    - "3306:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
     volumes:
-    - redis-data:/data
-
-  
+    - mysql-data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
 volumes:
-  redis-data:
+  mysql-data:
