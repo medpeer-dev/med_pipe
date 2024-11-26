@@ -65,8 +65,7 @@ RSpec.describe SampleExecutePipelineJob, type: :job do
       before do
         finished_plan = pipeline_plans.select(&:status_finished?).last
         allow(consumer).to receive(:run).and_return(finished_plan)
-        waiting_plans = pipeline_plans.select(&:status_waiting?)
-        allow(producer).to receive(:run).and_return(waiting_plans)
+        allow(producer).to receive(:run).and_return(nil)
       end
 
       it "on_finishが呼ばれない" do

@@ -23,8 +23,9 @@ class SampleExecutePipelineJob < ApplicationJob
 
   def produce(pipeline_group, interval_sec)
     enqueued_plans = MedPipe::PipelinePlanProducer.new(pipeline_group).run
-    if enqueued_plans.blank? && pipeline_group.pipeline_plans.active.empty?
-      on_finish
+
+    if enqueued_plans.blank?
+      on_finish if pipeline_group.pipeline_plans.active.empty?
       return
     end
 
