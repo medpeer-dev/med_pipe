@@ -28,6 +28,6 @@ jobs:
         run: |
           cp .github/database.yml spec/dummy/config/database.yml
           bundle exec rails db:create RAILS_ENV=test
-          bundle exec rails db:migrate RAILS_ENV=test
+          bundle exec rails db:schema:load RAILS_ENV=test
       - name: Test with RSpec
         run: bundle exec rspec
