@@ -29,6 +29,8 @@ RSpec.describe MedPipe::PipelinePlanConsumer do
         expect(pipeline_runner).to receive(:call).once
         plan = consumer.run
         expect(plan.status).to eq("finished")
+        expect(plan.started_at).to be_present
+        expect(plan.finished_at).to be_present
         expect(plan.id).to eq(target_plan.id)
       end
     end

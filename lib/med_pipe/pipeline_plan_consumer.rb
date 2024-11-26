@@ -28,7 +28,7 @@ class MedPipe::PipelinePlanConsumer
       target_pipeline_plan = @pipeline_group.pipeline_plans.lock.status_enqueued.order(priority: :desc).first
       return if target_pipeline_plan.nil?
 
-      target_pipeline_plan.update!(status: :running)
+      target_pipeline_plan.update!(status: :running, started_at: Time.current)
       target_pipeline_plan
     end
   end
