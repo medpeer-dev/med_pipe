@@ -26,7 +26,7 @@ jobs:
           bundler-cache: true
       - name: DB create and migrate
         run: |
-          cp .github/database.yml config/database.yml
+          cp .github/database.yml spec/dummy/config/database.yml
           bundle exec rails db:create RAILS_ENV=test
           bundle exec rails db:migrate RAILS_ENV=test
       - name: Test with RSpec
