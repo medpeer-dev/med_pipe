@@ -1,0 +1,33 @@
+name: test
+on: [pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 10
+    services:
+      mysql:
+        image: bitnami/mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: mysql
+          MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
+        ports:
+          - "3306:3306"
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ruby/setup-ruby@v1 # ruby-versionはprojectの.ruby-versionを読む
+        with:
+          bundler-cache: true
+      - name: DB create and migrate
+        run: |
+          cp .github/database.yml config/database.yml
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
+      - name: Test with RSpec
+        run: bundle exec rspec
