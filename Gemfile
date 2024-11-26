@@ -9,7 +9,7 @@ gemspec
 gem "propshaft"
 gem "puma"
 
-gem "sqlite3"
+gem "trilogy"
 
 gem "factory_bot_rails"
 gem "rubocop", require: false
