@@ -61,6 +61,7 @@ RSpec.describe MedPipe::BatchIdFetcher do
           results = fetcher.each.to_a
 
           # load_idsが3回呼ばれることを確認
+          # 例
           # 1回目: id 1-3
           # 2回目: id 4-6
           # 3回目: id 7
@@ -76,8 +77,8 @@ RSpec.describe MedPipe::BatchIdFetcher do
 
           # 呼び出し時の引数を順番に検証
           expect(fetcher).to have_received(:load_ids).with(0).ordered
-          expect(fetcher).to have_received(:load_ids).with(3).ordered
-          expect(fetcher).to have_received(:load_ids).with(6).ordered
+          expect(fetcher).to have_received(:load_ids).with(TestUser.find_by(name: "User 2").id).ordered
+          expect(fetcher).to have_received(:load_ids).with(TestUser.find_by(name: "User 5").id).ordered
         end
       end
     end
