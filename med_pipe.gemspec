@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors     = ["mpg-taichi-sato"]
   spec.homepage    = "https://github.com/medpeer-dev/med_pipe"
   spec.summary     = "Provides a system for processing data ranging from 1 million to several billion records"
-  spec.description = File.read(File.expand_path("README.md", __dir__))
+  spec.description = "Provides a system for processing data ranging from 1 million to several billion records"
   spec.license     = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
