@@ -5,10 +5,10 @@
 class SampleExecutePipelineJob < ApplicationJob
   queue_as :default
 
-  def perform(pipeline_group_id, start = true, interval = 30.seconds)
+  def perform(pipeline_group_id, start = true, interval_sec = 30)
     pipeline_group = MedPipe::PipelineGroup.find(pipeline_group_id)
     consume(pipeline_group) unless start
-    produce(pipeline_group, interval)
+    produce(pipeline_group, interval_sec)
   end
 
   private
@@ -21,7 +21,7 @@ class SampleExecutePipelineJob < ApplicationJob
     end
   end
 
-  def produce(pipeline_group, interval)
+  def produce(pipeline_group, interval_sec)
     enqueued_plans = MedPipe::PipelinePlanProducer.new(pipeline_group).run
     if enqueued_plans.blank? && pipeline_group.pipeline_plans.active.empty?
       on_finish
@@ -29,7 +29,8 @@ class SampleExecutePipelineJob < ApplicationJob
     end
 
     enqueued_plans.each_with_index do |_, i|
-      self.class.set(wait: i * interval).perform_later(pipeline_group.id, false, interval)
+      wait_sec = i * interval_sec
+      self.class.set(wait: wait_sec).perform_later(pipeline_group.id, false, interval_sec)
     end
   end
 
