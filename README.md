@@ -48,6 +48,14 @@ gem "med_pipe"
 $ rails med_pipe:install:migrations
 ```
 
+### Test
+
+Add this line to your test.rb to use factories in med_pipe
+
+```test.rb
+config.factory_bot.definition_file_paths << MedPipe::Engine.root.join('spec/factories')
+```
+
 ## Contributing
 Bug reports and pull requests are welcome.
 
