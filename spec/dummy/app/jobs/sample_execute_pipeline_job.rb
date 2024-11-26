@@ -29,7 +29,7 @@ class SampleExecutePipelineJob < ApplicationJob
     end
 
     enqueued_plans.each_with_index do |_, i|
-      SampleExecutePipelineJob.set(wait: i * interval).perform_later(pipeline_group.id, false, interval)
+      self.class.set(wait: i * interval).perform_later(pipeline_group.id, false, interval)
     end
   end
 
