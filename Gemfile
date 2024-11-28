@@ -5,13 +5,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Specify your gem's dependencies in med_pipe.gemspec.
 gemspec
+eval_gemfile "Gemfile.common"
 
 gem "propshaft"
 gem "puma"
 
-gem "trilogy"
-
-gem "factory_bot_rails"
 gem "rubocop", require: false
 gem "rubocop-performance", require: false
 gem "rubocop-rails", require: false
