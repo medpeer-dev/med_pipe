@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
+        ruby-version:
+          - 3.3
         rails-version:
           - 7.2
     timeout-minutes: 10
@@ -28,11 +30,14 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: remove Gemfile.lock
-        run: rm -f Gemfile.lock
+      - name: remove Gemfile.lock and ruby version
+        run: |
+          rm -f Gemfile.lock
+          rm -f .ruby-version
       - uses: ruby/setup-ruby@v1 # ruby-versionはprojectの.ruby-versionを読む
         with:
           bundler-cache: true
+          ruby-version: ${{ matrix.ruby-version }}
       - name: DB create and migrate
         run: |
           cp .github/database.yml spec/dummy/config/database.yml
