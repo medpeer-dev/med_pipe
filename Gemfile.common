@@ -1,0 +1,8 @@
+source "https://rubygems.org"
+
+# read dependencies from gemspec
+gemspec
+
+gem "propshaft"
+gem "trilogy"
+gem "factory_bot_rails"
