@@ -1,0 +1,12 @@
+default: &default
+  adapter: trilogy
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+test:
+  <<: *default
+  host: 127.0.0.1
+  database: medpipe_test
+  password: mysql
+  username: root
