@@ -3,6 +3,10 @@ on: [pull_request]
 jobs:
   test:
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        rails-version:
+          - 7.2
     timeout-minutes: 10
     services:
       mysql:
@@ -17,17 +21,22 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
+    env:
+      RAILS_ENV: test
+      BUNDLE_GEMFILE: ${{ github.workspace }}/.github/gemfiles/Gemfile.rails-${{ matrix.rails-version }}
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: remove Gemfile.lock
+        run: rm -f Gemfile.lock
       - uses: ruby/setup-ruby@v1 # ruby-versionはprojectの.ruby-versionを読む
         with:
           bundler-cache: true
       - name: DB create and migrate
         run: |
           cp .github/database.yml spec/dummy/config/database.yml
-          bundle exec rails db:create RAILS_ENV=test
-          bundle exec rails db:schema:load RAILS_ENV=test
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
       - name: Test with RSpec
         run: bundle exec rspec
