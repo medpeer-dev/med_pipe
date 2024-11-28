@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
     Dir["{app,config,db,lib}/**/*", "spec/factories/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   end
 
-  # Rails 8にあげるためにはenumの書き方を変える必要がある
-  spec.add_dependency "rails", ">= 6.1.7", "< 8.0"
+  spec.add_dependency "rails", ">= 7.2.0"
   spec.metadata["rubygems_mfa_required"] = "true"
 end
