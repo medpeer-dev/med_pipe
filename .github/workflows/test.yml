@@ -8,6 +8,7 @@ jobs:
         ruby-version:
           - 3.3
         rails-version:
+          - 6.1
           - 7.2
     timeout-minutes: 10
     services:
