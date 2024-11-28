@@ -1,39 +1,51 @@
-# MedPipe <sup>BETA</sup>
-100万 ~ 数10億程度のデータを処理するための仕組みを提供する Rails エンジンです。
+# MedPipe
+A Rails engine that provides mechanisms for processing datasets ranging from 1 million to several billion records.
 
 ## Concept
 ### MedPipe::Pipeline
-apply で後述する PipelineTask を登録し、run で順番に実行します。
+Register PipelineTask through 'apply' method and execute them sequentially using 'run'.
 
 ### MedPipe::PipelineTask
-Pipeline に登録する処理の単位です。  
-DB からの読み込みや、S3 へのアップロード等やることを分割してタスク化します。  
-大量データを扱う際には Enumerable::Lazy を使うことで分割して処理をすることができます。  
-call を実装する必要があります
+This is the basic unit of processing registered in the Pipeline.  
+Tasks are divided into specific operations such as reading from DB or uploading to S3.  
+When handling large datasets, Enumerable::Lazy can be used to process data in chunks.  
+You need to implement the 'call' method:
 
-```.rb
+```ruby
 @param context [Hash] Stores data during pipeline execution
 @param prev_result [Object] The result of the previous task
 def call(context, prev_result)
-  yield 次のTaskに渡すデータ
+  yield "data_to_pass_to_next_task"
 end
 ```
 
 ### MedPipe::PipelinePlan
-Pipeline の状態、オプション、結果を保存するためのモデルです。  
-Task で使うためのオプションを渡す方法は PipelinePlan から取得するか、contextで伝搬するかの二択です。
+A model for storing Pipeline state, options, and results.  
+There are two ways to pass options for Tasks: either retrieve from PipelinePlan or propagate through context.
 
 ### MedPipe::PipelineGroup
-一つのジョブで実行する Plan をまとめるためのモデルです。  
-実行中に parallel_limit を 0 にすることで中断することができます。
+A model for grouping Plans to be executed in a single job.  
+Execution can be interrupted by setting parallel_limit to 0 during runtime.
 
 ## Usage
 
-1. Reader, Uploader 等の PipelineTask を作成 [Samples](https://github.com/medpeer-dev/med_pipe/tree/main/spec/dummy/app/models/pipeline_task)
-2. PipelineRunner を作成 [Sample](https://github.com/medpeer-dev/med_pipe/blob/main/spec/dummy/app/models/sample_pipeline_runner.rb)
-3. Pipeline を並列実行するためのジョブを作成 [Sample](https://github.com/medpeer-dev/med_pipe/blob/main/spec/dummy/app/jobs/sample_execute_pipeline_job.rb)
-4. PipelinePlan を登録するコードを記述
-5. 実行
+1. Create PipelineTask such as Reader, Uploader, etc. [Samples](https://github.com/medpeer-dev/med_pipe/tree/main/spec/dummy/app/models/pipeline_task)
+2. Create PipelineRunner [Sample](https://github.com/medpeer-dev/med_pipe/blob/main/spec/dummy/app/models/sample_pipeline_runner.rb)
+3. Create a job for parallel Pipeline execution [Sample](https://github.com/medpeer-dev/med_pipe/blob/main/spec/dummy/app/jobs/sample_execute_pipeline_job.rb)
+4. Write code to register PipelinePlan
+5. Execute like this:
+
+```ruby
+# add plan
+pipeline_group = MedPipe::PipelineGroup.create!(parallel_limit: 10)
+date_range = Date.new(2024, 6, 1)..Date.new(2024, 6, 30)
+date_range.each do |date|
+  pipeline_group.pipeline_plans.status_waiting.create!(name: 'point_events', output_unit: :daily, target_date: date)
+end
+
+# execute
+ExecutePipelineJob.perform_later(pipeline_group.id)
+```
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -42,7 +54,7 @@ Add this line to your application's Gemfile:
 gem "med_pipe"
 ```
 
-### migrationファイルの追加
+### Adding migration files
 
 ```shell
 $ rails med_pipe:install:migrations
