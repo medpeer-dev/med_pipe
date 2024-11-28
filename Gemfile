@@ -7,7 +7,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 eval_gemfile "Gemfile.common"
 
-gem "propshaft"
 gem "puma"
 
 gem "rubocop", require: false
