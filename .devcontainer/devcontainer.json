@@ -12,5 +12,6 @@
 
   "containerEnv": {
     "TZ": "Asia/Tokyo"
-  }
+  },
+  "postCreateCommand": "spec/dummy/bin/setup"
 }
