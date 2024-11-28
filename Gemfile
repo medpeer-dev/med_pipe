@@ -3,8 +3,6 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-# Specify your gem's dependencies in med_pipe.gemspec.
-gemspec
 eval_gemfile "Gemfile.common"
 
 gem "puma"
