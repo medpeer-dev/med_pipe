@@ -21,5 +21,5 @@ gem "rubocop-rspec", require: false
 # gem "debug", ">= 1.0.0"
 
 group :test do
-  gem "rspec-rails", "6.1.5"
+  gem "rspec-rails", "~> 7.1.0"
 end
