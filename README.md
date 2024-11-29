@@ -3,7 +3,7 @@ A Rails engine that provides mechanisms for processing datasets ranging from 1 m
 
 ## Concept
 
-![MedPipeConcept](https://github.com/user-attachments/assets/984e2608-9ff3-43c7-b50e-0392d2729146)
+![MedPipeConcept](https://github.com/user-attachments/assets/69ef986b-33cc-478c-830f-78d24ff6c9f4)
 
 ### MedPipe::Pipeline
 Register PipelineTask through 'apply' method and execute them sequentially using 'run'.
