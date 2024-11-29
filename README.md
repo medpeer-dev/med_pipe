@@ -1,4 +1,6 @@
 # MedPipe
+![test_badge](https://github.com/medpeer-dev/med_pipe/actions/workflows/test.yml/badge.svg)
+
 A Rails engine that provides mechanisms for processing datasets ranging from 1 million to several billion records.
 
 ## Concept
