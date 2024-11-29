@@ -9,7 +9,7 @@ A Rails engine that provides mechanisms for processing datasets ranging from 1 m
 Register PipelineTask through 'apply' method and execute them sequentially using 'run'.
 
 ### MedPipe::PipelineTask
-This is the basic unit of processing registered in the Pipeline.  
+This is the basic unit of processing registered in the pipeline.  
 Tasks are divided into specific operations such as reading from DB or uploading to S3.  
 When handling large datasets, Enumerable::Lazy can be used to process data in chunks.  
 You need to implement the 'call' method:
@@ -23,11 +23,11 @@ end
 ```
 
 ### MedPipe::PipelinePlan
-A model for storing Pipeline state, options, and results.  
-There are two ways to pass options for Tasks: either retrieve from PipelinePlan or propagate through context.
+A model for storing pipeline state, options, and results.  
+There are two ways to pass options for tasks: either retrieve from PipelinePlan or propagate through context.
 
 ### MedPipe::PipelineGroup
-A model for grouping Plans to be executed in a single job.  
+A model for grouping plans.  
 Execution can be interrupted by setting parallel_limit to 0 during runtime.
 
 ## Usage
