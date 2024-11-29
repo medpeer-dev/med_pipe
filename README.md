@@ -2,6 +2,9 @@
 A Rails engine that provides mechanisms for processing datasets ranging from 1 million to several billion records.
 
 ## Concept
+
+![MedPipeConcept](https://github.com/user-attachments/assets/984e2608-9ff3-43c7-b50e-0392d2729146)
+
 ### MedPipe::Pipeline
 Register PipelineTask through 'apply' method and execute them sequentially using 'run'.
 
